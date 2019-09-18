@@ -1,0 +1,20 @@
+﻿@model IEnumerable<VideoGameStore2.Models.Game>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Welcome to our terrible online game store!</h2>
+
+
+
+@foreach (var item in Model) {
+    <div>
+        <img src="@item.ImageUrl" />
+        <p class="GameName">@Html.DisplayFor(modelItem => item.Name)</p>
+        <p class="GamePrice">@Html.DisplayFor(modelItem => item.Price)</p>
+    </div>
+
+}
+
+If you have questions please email us at bob@videogamestore.com
