@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using VideoGameStore2.Models;
 
 namespace VideoGameStore2.Models
 {
-    public class GameStoreDBContext : DbContext
+    public class GameStoreDBContext : IdentityDbContext<GameStoreUser>
     {
         public GameStoreDBContext (DbContextOptions<GameStoreDBContext> options)
             : base(options)
@@ -19,7 +20,7 @@ namespace VideoGameStore2.Models
         public DbSet<VideoGameStore2.Models.Genre> Genre { get; set; }
 
         public DbSet<VideoGameStore2.Models.Developer> Developer { get; set; }
-
+        public DbSet<VideoGameStore2.Models.GameStoreUser> GameStoreUsers { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

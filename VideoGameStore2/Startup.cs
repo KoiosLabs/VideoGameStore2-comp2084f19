@@ -11,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using VideoGameStore2.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace VideoGameStore2
 {
@@ -38,6 +40,17 @@ namespace VideoGameStore2
 
             services.AddDbContext<GameStoreDBContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("GameStoreDBContext")));
+            services.AddAuthentication()
+                .AddGoogle(options =>
+                {
+                    IConfigurationSection googleAuthNSection =
+                        Configuration.GetSection("Authentication:Google");
+
+                    options.ClientId = googleAuthNSection["ClientId"];
+                    options.ClientSecret = googleAuthNSection["ClientSecret"];
+                });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +69,7 @@ namespace VideoGameStore2
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
@@ -64,5 +78,7 @@ namespace VideoGameStore2
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
+
+
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using VideoGameStore2.Models;
 
 namespace VideoGameStore2.Controllers
 {
+    [Authorize]
     public class GenreManagerController : Controller
     {
         private readonly GameStoreDBContext _context;

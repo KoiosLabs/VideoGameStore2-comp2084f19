@@ -1,0 +1,36 @@
+Adding identity to mvc .net core
+1) add  : IdentityDbContext<GameStoreUser> to db context
+2) add gamestoreuser dbset to context
+2) add GameStoreUser class extends IdentityUser
+3) add-migration, update-database
+4) scaffold, with new context, because logic.
+5) add line to startup.cs
+6) change identity hosting startup to use our existing context, because their scaffolding engine is lame.
+7) remove new context, and connection string
+8) add <partial name="_LoginPartial" /> under our navbar ul
+9) fix the css for bootstrap 4 in the login partial:
+@using Microsoft.AspNetCore.Identity
+@using VideoGameStore2.Models
+@inject SignInManager<GameStoreUser> SignInManager
+@inject UserManager<GameStoreUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })" method="post" id="logoutForm" class="navbar-right">
+        <ul class="nav navbar-nav navbar-right">
+            <li class="nav-item mr-auto">
+                <a  class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+            </li>
+            <li class="nav-item mr-auto">
+                <button type="submit" class="btn btn-sm btn-outline-secondary">Logout</button>
+            </li>
+        </ul>
+    </form>
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li class="nav-item mr-auto"><a class="nav-link"  asp-area="Identity" asp-page="/Account/Register">Register</a></li>
+        <li class="nav-item mr-auto"><a class="nav-link"  asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+    </ul>
+}
