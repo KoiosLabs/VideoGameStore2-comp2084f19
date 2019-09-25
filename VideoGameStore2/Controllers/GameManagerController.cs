@@ -48,8 +48,8 @@ namespace VideoGameStore2.Controllers
         // GET: GameManager/Create
         public IActionResult Create()
         {
-            ViewData["DeveloperId"] = new SelectList(_context.Set<Developer>(), "DeveloperId", "DeveloperId");
-            ViewData["GenreId"] = new SelectList(_context.Set<Genre>(), "GenreId", "Description");
+            ViewData["DeveloperId"] = new SelectList(_context.Set<Developer>(), "DeveloperId", "Name");
+            ViewData["GenreId"] = new SelectList(_context.Set<Genre>(), "GenreId", "Name");
             return View();
         }
 
@@ -66,8 +66,8 @@ namespace VideoGameStore2.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DeveloperId"] = new SelectList(_context.Set<Developer>(), "DeveloperId", "DeveloperId", game.DeveloperId);
-            ViewData["GenreId"] = new SelectList(_context.Set<Genre>(), "GenreId", "Description", game.GenreId);
+            ViewData["DeveloperId"] = new SelectList(_context.Set<Developer>(), "DeveloperId", "Name", game.DeveloperId);
+            ViewData["GenreId"] = new SelectList(_context.Set<Genre>(), "GenreId", "Name", game.GenreId);
             return View(game);
         }
 

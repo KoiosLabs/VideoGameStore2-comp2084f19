@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,6 +14,8 @@ namespace VideoGameStore2.Models
         public virtual String Name { get; set; }
         public virtual String Description { get; set; }
         public virtual String MinimumRequirements { get; set; }
+        [DataType(DataType.Currency)]
+
         public virtual Decimal Price { get; set; }
 
         public virtual String ImageUrl { get; set; }
