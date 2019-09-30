@@ -8,7 +8,7 @@ using VideoGameStore2.Models;
 
 namespace VideoGameStore2.Models
 {
-    public class GameStoreDBContext : IdentityDbContext<GameStoreUser>
+    public class GameStoreDBContext : IdentityDbContext<GameStoreUser,StoreRole,String>
     {
         public GameStoreDBContext (DbContextOptions<GameStoreDBContext> options)
             : base(options)
@@ -19,8 +19,7 @@ namespace VideoGameStore2.Models
 
         public DbSet<VideoGameStore2.Models.Genre> Genre { get; set; }
 
-        public DbSet<VideoGameStore2.Models.Developer> Developer { get; set; }
-        public DbSet<VideoGameStore2.Models.GameStoreUser> GameStoreUsers { get; set; }
+        public DbSet<VideoGameStore2.Models.Developer> Developer { get; set; }        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

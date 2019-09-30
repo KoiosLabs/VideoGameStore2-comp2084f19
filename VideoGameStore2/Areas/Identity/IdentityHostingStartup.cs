@@ -19,8 +19,11 @@ namespace VideoGameStore2.Areas.Identity
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("GameStoreDBContext")));
 
-                services.AddDefaultIdentity<GameStoreUser>()
-                    .AddEntityFrameworkStores<GameStoreDBContext>();
+                services.AddIdentity<GameStoreUser,StoreRole>()
+                .AddRoleManager<RoleManager<StoreRole>>()
+                .AddDefaultUI()
+                .AddDefaultTokenProviders()
+                .AddEntityFrameworkStores<GameStoreDBContext>();
             });
         }
     }

@@ -10,7 +10,7 @@ using VideoGameStore2.Models;
 
 namespace VideoGameStore2.Controllers
 {
-    [Authorize]
+    [Authorize(Roles ="Admin")]
     public class GameManagerController : Controller
     {
         private readonly GameStoreDBContext _context;
