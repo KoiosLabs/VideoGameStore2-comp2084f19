@@ -1,0 +1,7 @@
+﻿@model IEnumerable<Game>
+<div class="row">
+        @foreach (var item in Model)
+        {
+            await Html.RenderPartialAsync("GameCard", item);
+        }
+</div>

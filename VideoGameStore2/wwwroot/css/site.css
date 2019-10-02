@@ -35,3 +35,8 @@ body {
         display: none;
     }
 }
+
+
+#ui-id-1 {
+    z-index: 9999;
+}
