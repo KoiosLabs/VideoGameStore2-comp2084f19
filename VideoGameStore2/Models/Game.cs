@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using VideoGameStore2.Data;
 
 namespace VideoGameStore2.Models
 {
@@ -12,6 +13,7 @@ namespace VideoGameStore2.Models
 
 
         public virtual String Name { get; set; }
+        [MaxWords(2, ErrorMessage="You have too many words in {0}")]
         public virtual String Description { get; set; }
         public virtual String MinimumRequirements { get; set; }
         [DataType(DataType.Currency)]

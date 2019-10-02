@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - VideoGameStore2</title>
 
-    <link rel="stylesheet" href="~/vendor.min.css" />
-
+    <link rel="stylesheet" href="~/css/vendor.min.css" />
+    <link rel="stylesheet" href="~/css/site.css"/>
 </head>
 <body style="padding-top:60px">
     <nav class="navbar navbar-dark fixed-top bg-dark navbar-expand-lg">
@@ -14,8 +14,8 @@
             <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">VideoGameStore2</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
-            </button>                
-            
+            </button>
+
             <div class="navbar-collapse collapse" id="navbarNav">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item mr-auto"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
@@ -28,11 +28,15 @@
                 <partial name="_LoginPartial" />
             </div>
         </div>
+        <form class="form-inline" data-ajax="true" data-ajax-method="post" data-ajax-mode="replace" data-ajax-update="#body" asp-controller="search" asp-action="Index">
+            <input name="query" id="query" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
     </nav>
 
     <partial name="_CookieConsentPartial" />
 
-    <div class="container body-content">
+    <div class="container body-content" id="body">
         @RenderBody()
         <hr />
         <footer>
@@ -41,7 +45,7 @@
     </div>
 
 
-    <script src="~/vendor.min.js"></script>
+    <script src="~/js/vendor.min.js"></script>
 
     <script src="~/js/site.js" asp-append-version="true"></script>
 

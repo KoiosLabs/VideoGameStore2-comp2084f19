@@ -1,0 +1,15 @@
+﻿@model Game
+
+    <div class="col-md-3">
+        <div class="card">
+            <div class="embed-responsive embed-responsive-1by1">
+                <img src="@Model.ImageUrl" class="card-img-top embed-responsive-item" />
+            </div>
+            <div class="card-body">
+                <p class="card-title">@Html.DisplayFor(Model => Model.Name)</p>
+                <p class="card-subtitle mb-2 text-muted">@Html.DisplayFor(Model => Model.Description)</p>
+                <p class="card-text">@Html.DisplayFor(Model => Model.Price)</p>
+                <a class="btn btn-primary" asp-controller="Shop" asp-action="Details" asp-route-id="@Model.Id">Details</a>
+            </div>
+        </div>
+    </div>
