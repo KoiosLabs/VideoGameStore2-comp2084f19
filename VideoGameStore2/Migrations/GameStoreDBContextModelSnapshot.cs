@@ -61,11 +61,9 @@ namespace VideoGameStore2.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128);
+                    b.Property<string>("LoginProvider");
 
-                    b.Property<string>("ProviderKey")
-                        .HasMaxLength(128);
+                    b.Property<string>("ProviderKey");
 
                     b.Property<string>("ProviderDisplayName");
 
@@ -96,17 +94,47 @@ namespace VideoGameStore2.Migrations
                 {
                     b.Property<string>("UserId");
 
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128);
+                    b.Property<string>("LoginProvider");
 
-                    b.Property<string>("Name")
-                        .HasMaxLength(128);
+                    b.Property<string>("Name");
 
                     b.Property<string>("Value");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("VideoGameStore2.Models.Cart", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.HasKey("id");
+
+                    b.ToTable("Carts");
+                });
+
+            modelBuilder.Entity("VideoGameStore2.Models.CartItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CartId");
+
+                    b.Property<int>("GameId");
+
+                    b.Property<int>("Qty");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CartId");
+
+                    b.HasIndex("GameId");
+
+                    b.ToTable("CartItems");
                 });
 
             modelBuilder.Entity("VideoGameStore2.Models.Developer", b =>
@@ -154,7 +182,8 @@ namespace VideoGameStore2.Migrations
 
                     b.Property<string>("MinimumRequirements");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
                     b.Property<decimal>("Price");
 
@@ -179,6 +208,8 @@ namespace VideoGameStore2.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("AccessFailedCount");
+
+                    b.Property<int?>("CartId");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
@@ -214,6 +245,8 @@ namespace VideoGameStore2.Migrations
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CartId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -317,6 +350,19 @@ namespace VideoGameStore2.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("VideoGameStore2.Models.CartItem", b =>
+                {
+                    b.HasOne("VideoGameStore2.Models.Cart", "cart")
+                        .WithMany("items")
+                        .HasForeignKey("CartId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("VideoGameStore2.Models.Game", "game")
+                        .WithMany()
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("VideoGameStore2.Models.Game", b =>
                 {
                     b.HasOne("VideoGameStore2.Models.Developer", "Dev")
@@ -328,6 +374,13 @@ namespace VideoGameStore2.Migrations
                         .WithMany("Games")
                         .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("VideoGameStore2.Models.GameStoreUser", b =>
+                {
+                    b.HasOne("VideoGameStore2.Models.Cart", "cart")
+                        .WithMany()
+                        .HasForeignKey("CartId");
                 });
 #pragma warning restore 612, 618
         }

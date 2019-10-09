@@ -17,7 +17,8 @@ namespace VideoGameStore2
         public static void Main(string[] args)
         {
             var host = CreateWebHostBuilder(args);
-            using (var scope = host.Services.CreateScope())
+            var builtHost = host.Build();
+            using (var scope = builtHost.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
                 try
@@ -33,11 +34,11 @@ namespace VideoGameStore2
                     logger.LogError(exception, "An error occurred while creating roles");
                 }
             }
-            host.Run();
+            builtHost.Run();
         }
 
-        public static IWebHost CreateWebHostBuilder(string[] args) =>
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>().Build();
+                .UseStartup<Startup>();
     }
 }

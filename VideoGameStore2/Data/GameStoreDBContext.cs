@@ -20,6 +20,11 @@ namespace VideoGameStore2.Models
         public DbSet<VideoGameStore2.Models.Genre> Genre { get; set; }
 
         public DbSet<VideoGameStore2.Models.Developer> Developer { get; set; }        
+
+        public DbSet<Cart> Carts { get; set; }
+
+        public DbSet<CartItem> CartItems { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

@@ -6,6 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20190930135855_roles.cs" />
+    <Compile Remove="Migrations\20190930135855_roles.Designer.cs" />
+    <Compile Remove="Migrations\20191009202829_cart.cs" />
+    <Compile Remove="Migrations\20191009202829_cart.Designer.cs" />
+    <Compile Remove="Migrations\20191009202955_cart.cs" />
+    <Compile Remove="Migrations\20191009202955_cart.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="3.0.415" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
