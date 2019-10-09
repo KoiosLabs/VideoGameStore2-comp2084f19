@@ -29,9 +29,11 @@ namespace VideoGameStore2.Controllers
                 {
                     items = new List<CartItem>()
                 };
-                _context.Add(gameStoreUser.cart);
+                _context.Carts.Add(gameStoreUser.cart);
                 _context.Update(gameStoreUser);
-                
+
+                 _context.SaveChanges();
+                _context.Update(gameStoreUser);
             }
 
             List<CartItem> items = gameStoreUser.cart.items;
@@ -47,11 +49,11 @@ namespace VideoGameStore2.Controllers
                     CartId = gameStoreUser.cart.id,
                     Qty= 1
                 };
-                _context.Add(ci);
+                //_context.Add(ci);
                 items.Add(ci);
             }
             _context.Update(gameStoreUser.cart);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
             return View();
         }
     }
