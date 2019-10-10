@@ -13,6 +13,6 @@ namespace VideoGameStore2.Models
 
         public virtual int? CartId { get; set; }
         [ForeignKey("CartId")]
-        public virtual Cart cart { get; set; }
+        public virtual Cart Cart { get; set; }
     }
 }

@@ -11,10 +11,10 @@ namespace VideoGameStore2.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public virtual int id { get; set; }
+        public virtual int Id { get; set; }
 
 
-
-        public virtual List<CartItem> items { get; set; }
+        public virtual GameStoreUser User { get; set; }
+        public virtual List<CartItem> CartItems { get; set; }
     }
 }

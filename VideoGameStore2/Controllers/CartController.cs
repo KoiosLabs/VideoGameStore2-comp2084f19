@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using VideoGameStore2.Models;
 
 namespace VideoGameStore2.Controllers
@@ -21,22 +22,23 @@ namespace VideoGameStore2.Controllers
         {
             String userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            var gameStoreUser = _context.Users.Where(x => x.Id == userId).SingleOrDefault();
+            var gameStoreUser = _context.Users//.Include(user=>user.Cart)
+                .Where(x => x.Id == userId).SingleOrDefault();
 
-            if(gameStoreUser.cart == null)
+            if(gameStoreUser.Cart == null)
             {
-                gameStoreUser.cart = new Cart()
+                gameStoreUser.Cart = new Cart()
                 {
-                    items = new List<CartItem>()
+                    CartItems = new List<CartItem>()
                 };
-                _context.Carts.Add(gameStoreUser.cart);
+                _context.Carts.Add(gameStoreUser.Cart);
                 _context.Update(gameStoreUser);
 
                  _context.SaveChanges();
                 _context.Update(gameStoreUser);
             }
 
-            List<CartItem> items = gameStoreUser.cart.items;
+            List<CartItem> items = gameStoreUser.Cart.CartItems;
             if (items.Exists(x=> x.GameId == id))
             {
                 items.Where(x => x.GameId == id).SingleOrDefault().Qty++;
@@ -46,13 +48,13 @@ namespace VideoGameStore2.Controllers
                 CartItem ci = new CartItem()
                 {
                     GameId = id,
-                    CartId = gameStoreUser.cart.id,
+                    CartId = gameStoreUser.Cart.Id,
                     Qty= 1
                 };
                 //_context.Add(ci);
                 items.Add(ci);
             }
-            _context.Update(gameStoreUser.cart);
+            _context.Update(gameStoreUser.Cart);
             _context.SaveChanges();
             return View();
         }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VideoGameStore2.Models;
 
 namespace VideoGameStore2.Migrations
 {
     [DbContext(typeof(GameStoreDBContext))]
-    partial class GameStoreDBContextModelSnapshot : ModelSnapshot
+    [Migration("20191010134958_fixFK")]
+    partial class fixFK
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -107,11 +109,11 @@ namespace VideoGameStore2.Migrations
 
             modelBuilder.Entity("VideoGameStore2.Models.Cart", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.HasKey("Id");
+                    b.HasKey("id");
 
                     b.ToTable("Carts");
                 });
@@ -355,7 +357,7 @@ namespace VideoGameStore2.Migrations
             modelBuilder.Entity("VideoGameStore2.Models.CartItem", b =>
                 {
                     b.HasOne("VideoGameStore2.Models.Cart", "cart")
-                        .WithMany("CartItems")
+                        .WithMany("items")
                         .HasForeignKey("CartId")
                         .OnDelete(DeleteBehavior.Cascade);
 
@@ -380,8 +382,8 @@ namespace VideoGameStore2.Migrations
 
             modelBuilder.Entity("VideoGameStore2.Models.GameStoreUser", b =>
                 {
-                    b.HasOne("VideoGameStore2.Models.Cart", "Cart")
-                        .WithOne("User")
+                    b.HasOne("VideoGameStore2.Models.Cart", "cart")
+                        .WithOne("user")
                         .HasForeignKey("VideoGameStore2.Models.GameStoreUser", "CartId");
                 });
 #pragma warning restore 612, 618
