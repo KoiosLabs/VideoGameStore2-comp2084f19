@@ -11,5 +11,11 @@ $(function () {
         source: "search/autocomplete",
         minLength: 2
     });
+
+    $('.AddToCartBtn').click(function () {
+        var id = $(this).attr('id');
+        $('#AddToCart-' + id).load('/Cart/AddToCart/' + id);
+    }
+    )
 });
 

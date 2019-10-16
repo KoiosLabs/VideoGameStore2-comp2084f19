@@ -56,7 +56,7 @@ namespace VideoGameStore2.Controllers
             }
             _context.Update(gameStoreUser.Cart);
             _context.SaveChanges();
-            return View();
+            return PartialView();
         }
     }
 }
