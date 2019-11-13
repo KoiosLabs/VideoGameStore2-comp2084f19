@@ -22,7 +22,7 @@ namespace VideoGameStore2.Controllers
         {
             String userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            var gameStoreUser = _context.Users//.Include(user=>user.Cart)
+            var gameStoreUser = _context.Users.Include(user=>user.Cart).Include(user=>user.Cart.CartItems)
                 .Where(x => x.Id == userId).SingleOrDefault();
 
             if(gameStoreUser.Cart == null)

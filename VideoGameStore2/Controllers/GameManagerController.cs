@@ -62,6 +62,7 @@ namespace VideoGameStore2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Description,MinimumRequirements,Price,DeveloperId,GenreId")] Game game)
         {
+            
             if (ModelState.IsValid)
             {
                 _context.Add(game);
