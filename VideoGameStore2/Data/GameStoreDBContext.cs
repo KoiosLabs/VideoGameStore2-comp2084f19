@@ -15,18 +15,18 @@ namespace VideoGameStore2.Models
         {
         }
 
-        public DbSet<VideoGameStore2.Models.Game> Game { get; set; }
+        public virtual DbSet<VideoGameStore2.Models.Game> Game { get; set; }
 
-        public DbSet<VideoGameStore2.Models.Genre> Genre { get; set; }
+        public virtual DbSet<VideoGameStore2.Models.Genre> Genre { get; set; }
 
-        public DbSet<VideoGameStore2.Models.Developer> Developer { get; set; }        
+        public virtual DbSet<VideoGameStore2.Models.Developer> Developer { get; set; }
 
-        public DbSet<Cart> Carts { get; set; }
+        public virtual DbSet<Cart> Carts { get; set; }
 
-        public DbSet<CartItem> CartItems { get; set; }
+        public virtual DbSet<CartItem> CartItems { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseLazyLoadingProxies();
+            //optionsBuilder.UseLazyLoadingProxies();
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
