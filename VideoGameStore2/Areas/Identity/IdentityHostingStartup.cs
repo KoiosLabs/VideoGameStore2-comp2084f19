@@ -15,9 +15,7 @@ namespace VideoGameStore2.Areas.Identity
         public void Configure(IWebHostBuilder builder)
         {
             builder.ConfigureServices((context, services) => {
-                services.AddDbContext<GameStoreDBContext>(options =>
-                    options.UseSqlServer(
-                        context.Configuration.GetConnectionString("GameStoreDBContext")));
+                
 
                 services.AddIdentity<GameStoreUser,StoreRole>()
                 .AddRoleManager<RoleManager<StoreRole>>()

@@ -37,7 +37,6 @@ namespace VideoGameStore2
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
             services.AddDbContext<GameStoreDBContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("GameStoreDBContext")));
             //services.AddAuthentication()
