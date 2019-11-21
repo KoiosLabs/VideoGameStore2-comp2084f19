@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -22,6 +23,7 @@ namespace VideoGameStore2.Models
         [Required]
         public virtual String Telephone { get; set; }
 
+        [JsonIgnore]
         public virtual List<Game> Games
         {
             get; set;
