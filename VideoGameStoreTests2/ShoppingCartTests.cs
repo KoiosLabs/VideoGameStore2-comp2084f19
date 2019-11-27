@@ -44,7 +44,13 @@ namespace VideoGameStoreTests2
         public void testTotalCartValueWhenCartIsEmpty()
         {
             //Arrange
-            ShoppingCart shoppingCart = new ShoppingCart();
+            var db = MockDb.CreateMockDb();
+            var user = new ClaimsPrincipal(new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.Name, "Justin"),
+                    new Claim(ClaimTypes.NameIdentifier, "test@test.com"),
+                }, "mock"));
+            ShoppingCart shoppingCart = new ShoppingCart(db,user);
 
             //Act
 
@@ -55,12 +61,19 @@ namespace VideoGameStoreTests2
         public void testTotalCartValueWhenCartHasItems()
         {
             //Arrange
-            ShoppingCart shoppingCart = new ShoppingCart();
+            var db = MockDb.CreateMockDb();
+            var user = new ClaimsPrincipal(new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.Name, "Justin"),
+                    new Claim(ClaimTypes.NameIdentifier, "test@test.com"),
+                }, "mock"));
+            ShoppingCart shoppingCart = new ShoppingCart(db,user);
+            shoppingCart.addItem(1);
             shoppingCart.addItem(1);
             //Act
 
             //Assert
-            Assert.Equal(100, shoppingCart.total);
+            Assert.Equal(40, shoppingCart.total);
         }
     }
 }

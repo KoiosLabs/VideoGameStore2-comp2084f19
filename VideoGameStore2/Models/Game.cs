@@ -17,6 +17,7 @@ namespace VideoGameStore2.Models
         public virtual String Description { get; set; }
         public virtual String MinimumRequirements { get; set; }
         [DataType(DataType.Currency)]
+        [Required]
 
         public virtual Decimal Price { get; set; }
 
