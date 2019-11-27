@@ -25,7 +25,7 @@ namespace VideoGameStoreTests2
                 context.Users.Add(new GameStoreUser { Email = "test@test.com", Id = "test@test.com" });
                 context.Developer.Add(new Developer { Name = "Dev 1", City = "Toronto", DeveloperId = 1, StreetAddress = "123 Yonge", Telephone = "4164164164" });
                 context.Genre.Add(new Genre { Name = "Genre", Description = "Desc", GenreId = 1 });
-                context.Game.Add(new Game { Id = 1, Name = "Game 1", Description = "Desc 1", DeveloperId = 1, GenreId = 1, ImageUrl = "", MinimumRequirements = "REQ", Price = 19.99m });
+                context.Game.Add(new Game { Id = 1, Name = "Game 1", Description = "Desc 1", DeveloperId = 1, GenreId = 1, ImageUrl = "", MinimumRequirements = "REQ", Price = 20.0m });
                 context.SaveChanges();
             }
             return new GameStoreDBContext(options);

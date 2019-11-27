@@ -7,13 +7,14 @@ using System.Text;
 using VideoGameStore2.Controllers;
 using Xunit;
 using System.Linq;
+using VideoGameStore2.Models;
 
 namespace VideoGameStoreTests2
 {
     public class ShoppingCartTests
     {
         [Fact]
-        public async void TestAddGameToCart()
+        public void TestAddGameToCart()
         {
             //Arrange 
             var db = MockDb.CreateMockDb();
@@ -37,6 +38,29 @@ namespace VideoGameStoreTests2
             var result = Assert.IsType<PartialViewResult>(r);
             Assert.NotNull(db.Users.First().CartId);
             Assert.Equal(1, db.CartItems.Count());
+        }
+
+        [Fact]
+        public void testTotalCartValueWhenCartIsEmpty()
+        {
+            //Arrange
+            ShoppingCart shoppingCart = new ShoppingCart();
+
+            //Act
+
+            //Assert
+            Assert.Equal(0, shoppingCart.total);
+        }
+        [Fact]
+        public void testTotalCartValueWhenCartHasItems()
+        {
+            //Arrange
+            ShoppingCart shoppingCart = new ShoppingCart();
+            shoppingCart.addItem(1);
+            //Act
+
+            //Assert
+            Assert.Equal(100, shoppingCart.total);
         }
     }
 }
